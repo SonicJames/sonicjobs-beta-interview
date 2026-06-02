@@ -189,6 +189,14 @@
   .q-hint { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
 
   .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .chips-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 8px;
+  }
   .chip {
     background: var(--chip-bg);
     border: 1px solid var(--border);
@@ -197,12 +205,9 @@
     font-size: 12px;
     font-weight: 500;
     color: var(--muted);
-    cursor: pointer;
-    transition: all 0.15s;
+    cursor: default;
     user-select: none;
   }
-  .chip:hover { border-color: var(--gold); color: var(--text); }
-  .chip.selected { background: rgba(191,150,92,0.12); border-color: var(--gold); color: #7a5a2a; font-weight: 600; }
 
   textarea {
     width: 100%;
@@ -395,7 +400,7 @@ const QUESTIONS = [
   { section:null, id:"q7b", text:"If a service applied to jobs on your behalf automatically — without you reviewing each one — what's your biggest worry?", hint:"Think about what could go wrong. Being called for a job you don't want? Looking unprepared? Something else?", type:"textarea", chips:["Getting called for wrong roles","Sounding generic or fake","Employer detecting it's AI","Losing track of what I've applied for","Applying somewhere embarrassing","No major worries"] },
   { section:null, id:"q7c", text:"Do you think employers can tell when an application has been written by AI — and does that concern you?", hint:"Some candidates worry this puts them at a disadvantage. Others think everyone is doing it. What's your instinct?", type:"textarea", chips:["Yes — and it concerns me","Yes — but I don't think it matters","Probably not","No idea","I'd want to disclose it"] },
   { section:"Privacy & communications", sectionIcon:"🔒", sectionIntro:"Some features require handling your emails or storing your details. We want your honest reaction.", id:"q8", text:"If we could manage all your job application emails in one place — employer responses, interview requests, verification codes — would you trust a platform to do that?", hint:"Think about what would need to be true for you to hand over that part of the process.", type:"textarea", chips:["Yes, if I could still see everything","Only if I could turn it off","Not comfortable — email is private","Depends on the company"] },
-  { section:null, id:"q8b", text:"When you hear that a platform would handle your job application emails through a relay address, what's your gut reaction — and what would it take to trust it?", hint:"Be honest. Does it feel like phishing risk? A useful feature? Or something in between?", type:"textarea", chips:["Sounds like phishing — hard no","Nervous but could be convinced","Fine if the company is credible","Great idea — I hate managing those emails"] },
+  { section:null, id:"q8b", text:"When you hear that a platform would handle your job application emails through a relay address, what's your gut reaction — and what would it take to trust it?", hint:"Think of it like Apple\'s Hide My Email — you get a relay address that forwards everything to your real inbox, so you still see every message but employers only see the relay. Does that feel safe, or still uncomfortable?", type:"textarea", chips:["Sounds like phishing — hard no","Nervous but could be convinced","Fine if the company is credible","Great idea — I hate managing those emails"] },
   { section:null, id:"q9", text:"How do you feel about a service storing your CV, work history, and application preferences so you never have to re-enter them?", hint:"Some people love this convenience, others worry about data. What's your honest take?", type:"textarea", chips:["Great — convenience wins","Fine if I can delete it","Worried about data use","Only with clear privacy terms"] },
   { section:null, id:"q9b", text:"You probably already have a system for tracking your job search. What would it take to make you switch to a new platform and trust it with all of that?", hint:"Think about what you'd lose, what you'd gain, and what the new platform would have to nail to earn that switch.", type:"textarea", chips:["It'd have to save me real time","It'd need to prove results first","I'd need to try it risk-free","I don't have a system — I'd switch easily","I'd need to trust the company first"] },
   { section:"Value & willingness to pay", sectionIcon:"💳", sectionIntro:"One last section — about what this would be worth to you.", id:"q10", text:"If this service saved you 5 hours per week on job applications and measurably increased the number of interviews you got — what would that be worth to you per month?", hint:"Be honest — 'nothing, I wouldn't pay for this' is a valid and useful answer.", type:"textarea", chips:["I wouldn't pay for it","Up to $5/month","Up to $10/month","$15–$20/month","More — if results are proven"] },
@@ -447,9 +452,21 @@ function render() {
 function charCount(el,id){ var e=document.getElementById('cc-'+id); if(e) e.textContent=el.value.length+' chars'; }
 function rateBrand(id,score){ brandRatings[id]=score; var r=document.getElementById('stars-'+id); if(r) r.querySelectorAll('.star').forEach(function(s,i){s.classList.toggle('lit',i<score);}); }
 function pickFav(name,el){ answers['q_brand_fav']=name; document.querySelectorAll('#chips-brand-fav .chip').forEach(function(c){c.classList.remove('selected');}); el.classList.add('selected'); }
-function toggleChip(qid,el,val){ if(!answers[qid+'_chips']) answers[qid+'_chips']=[]; if(el.classList.contains('selected')){el.classList.remove('selected');answers[qid+'_chips']=answers[qid+'_chips'].filter(function(v){return v!==val;});}else{el.classList.add('selected');answers[qid+'_chips'].push(val);} }
+function toggleChip(){} // chips are now example-only
 function saveCurrentAnswer(){ var q=QUESTIONS[current],ta=document.getElementById('ta-'+q.id); if(ta) answers[q.id]=ta.value; if(q.type==='brand') answers['_brandRatings']=Object.assign({},brandRatings); }
-function nextQ(){ saveCurrentAnswer(); if(current<QUESTIONS.length-1){current++;render();window.scrollTo({top:0,behavior:'smooth'});}else{document.getElementById('interview-card').style.display='none';document.getElementById('progress-fill').style.width='100%';document.getElementById('progress-pct').textContent='100%';document.getElementById('progress-label').textContent='Complete';document.getElementById('signup-card').style.display='block';window.scrollTo({top:0,behavior:'smooth'});} }
+function nextQ(){
+  saveCurrentAnswer();
+  var q=QUESTIONS[current];
+  if(q.type!=='brand'){
+    var ta=document.getElementById('ta-'+q.id);
+    if(!ta||ta.value.trim().length<3){
+      if(ta){ta.style.borderColor='var(--gold)';ta.focus();}
+      var cc=document.getElementById('cc-'+q.id);
+      if(cc){cc.textContent='Please share your thoughts before continuing.';cc.style.color='var(--gold)';}
+      return;
+    }
+  }
+  if(current<QUESTIONS.length-1){current++;render();window.scrollTo({top:0,behavior:'smooth'});}else{document.getElementById('interview-card').style.display='none';document.getElementById('progress-fill').style.width='100%';document.getElementById('progress-pct').textContent='100%';document.getElementById('progress-label').textContent='Complete';document.getElementById('signup-card').style.display='block';window.scrollTo({top:0,behavior:'smooth'});} }
 function prevQ(){ saveCurrentAnswer(); if(current>0){current--;render();window.scrollTo({top:0,behavior:'smooth'});} }
 function skipQ(){ answers[QUESTIONS[current].id]='[skipped]'; nextQ(); }
 function updateProgress(){ var pct=Math.round((current/QUESTIONS.length)*100); document.getElementById('progress-fill').style.width=pct+'%'; document.getElementById('progress-pct').textContent=pct+'%'; document.getElementById('progress-label').textContent='Question '+(current+1)+' of '+QUESTIONS.length; }
