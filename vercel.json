@@ -4,7 +4,7 @@
     { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/privacy", "dest": "/privacy.html" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/", "dest": "/sonicjobs_candidate_interview.html" },
+    { "src": "/privacy", "dest": "/sonicjobs_privacy.html" }
   ]
 }
