@@ -319,7 +319,7 @@
 
   <div class="progress-card">
     <div class="progress-meta">
-      <span id="progress-label">Question 1 of 22</span>
+      <span id="progress-label">Question 1 of 24</span>
       <span id="progress-pct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
@@ -388,6 +388,8 @@ const QUESTIONS = [
   { section:"Your current job search", sectionIcon:"🔍", sectionIntro:"Let's start with where you are today — your honest experience of looking for work.", id:"q1", text:"Walk us through what your typical job search day looks like. What are you actually doing hour to hour?", hint:"Be as specific as you like — sites you visit, how many jobs you look at, how you decide to apply.", type:"textarea" },
   { section:null, id:"q2", text:"What's the most frustrating part of applying for jobs right now?", hint:"There are no wrong answers here — we're genuinely trying to understand what's broken.", type:"textarea" },
   { section:null, id:"q3", text:"How many jobs do you typically apply to per week? And how long does each application take you?", hint:"Rough estimates are fine.", type:"textarea", chips:["1–5 jobs / week","6–15 jobs / week","15+ jobs / week","It varies a lot"] },
+  { section:null, id:"q3b", text:"In the last month, roughly how many applications did you send out in total?", hint:"A ballpark is fine — we just want to understand the scale of your search.", type:"textarea", chips:["Fewer than 10","10–25","26–50","51–100","More than 100"] },
+  { section:null, id:"q3c", text:"And out of those, how many led to an interview — first round or beyond?", hint:"This helps us understand your current application-to-interview rate so we can measure how much the beta actually improves things for you.", type:"textarea", chips:["None yet","1–2","3–5","6–10","More than 10"] },
   { section:"The platforms you use today", sectionIcon:"📱", sectionIntro:"We want to understand which services you rely on — and how you really feel about them.", id:"q_inc1", text:"Which job platforms do you use most, and roughly how much of your time does each one get?", hint:"Think LinkedIn, Indeed, ZipRecruiter, Glassdoor, direct company sites — whatever's in your actual rotation.", type:"textarea", chips:["LinkedIn","Indeed","ZipRecruiter","Glassdoor","Company sites direct","Google Jobs","Jobcase","Other"] },
   { section:null, id:"q_inc2", text:"For the platform you use most — what keeps you coming back? What would you genuinely miss if it disappeared?", hint:"Try to be specific. 'It has lots of jobs' is less useful than 'the Easy Apply button means I don't have to think.'", type:"textarea" },
   { section:null, id:"q_inc3", text:"What does that same platform do that quietly irritates you — things you've just accepted as normal even though they're frustrating?", hint:"We're looking for the paper cuts — the things you've stopped noticing because they've always been there.", type:"textarea", chips:["Too many irrelevant jobs","Easy Apply goes nowhere","Recruiters spam me","No feedback after applying","Keeps showing same listings","Hard to track what I've applied for","Profile feels like a chore to maintain"] },
