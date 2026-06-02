@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Notice — SonicJobs Beta</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #201150;
+    --gold: #bf965c;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e5e0d8;
+    --light: #f8f7f5;
+    --surface: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--light); color: var(--text); font-family: 'Inter', sans-serif; padding: 0 0 80px; }
+
+  .topbar {
+    background: var(--navy);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .topbar-wordmark { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.06em; text-transform: uppercase; }
+  .topbar a { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; }
+  .topbar a:hover { color: var(--gold); }
+
+  .hero {
+    background: var(--navy);
+    padding: 40px 40px 52px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(191,150,92,0.15);
+    border: 1px solid rgba(191,150,92,0.35);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .hero p { font-size: 14px; color: rgba(255,255,255,0.55); }
+
+  .content {
+    max-width: 720px;
+    margin: -24px auto 0;
+    padding: 0 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 40px 44px;
+    box-shadow: 0 4px 24px rgba(32,17,80,0.08);
+  }
+
+  .last-updated {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 32px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  p { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; }
+  p strong { color: var(--text); font-weight: 600; }
+
+  ul { margin: 8px 0 14px 0; padding-left: 0; list-style: none; }
+  ul li {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 5px 0 5px 20px;
+    position: relative;
+  }
+  ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .highlight-box {
+    background: rgba(32,17,80,0.04);
+    border-left: 3px solid var(--navy);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  .highlight-box strong { color: var(--navy); }
+
+  .retention-box {
+    background: rgba(191,150,92,0.08);
+    border: 1px solid rgba(191,150,92,0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .retention-icon { font-size: 22px; flex-shrink: 0; }
+  .retention-text { font-size: 13px; color: var(--text); line-height: 1.65; }
+  .retention-text strong { color: var(--navy); }
+
+  .contact-box {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 14px;
+  }
+  .contact-box p { margin: 0; }
+  .contact-box a { color: var(--navy); font-weight: 600; }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-top: 24px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--navy); }
+
+  @media (max-width: 600px) {
+    .card { padding: 28px 20px; }
+    .topbar { padding: 14px 20px; }
+    .hero { padding: 32px 20px 44px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="topbar-logo" href="index.html">
+    <span class="topbar-wordmark">SonicJobs</span>
+  </a>
+  <a href="index.html">← Back to beta signup</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Legal</div>
+  <h1>Privacy Notice</h1>
+  <p>Beta Candidate Research Programme</p>
+</div>
+
+<div class="content">
+  <div class="card">
+    <div class="last-updated">Last updated: June 2026 &nbsp;·&nbsp; Version 1.0 &nbsp;·&nbsp; Applies to: SonicJobs Beta Interview &amp; Signup</div>
+
+    <h2><span class="num">1</span> Who we are</h2>
+    <p>This privacy notice applies to the SonicJobs beta candidate research programme operated by <strong>SonicJobs</strong>. We are the data controller for the personal information collected through this interview and signup process.</p>
+    <p>If you have any questions about how we handle your data, contact us at <strong>privacy@sonicjobs.com</strong>.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">2</span> What we collect and why</h2>
+    <p>When you complete the beta interview and signup form, we collect the following:</p>
+    <ul>
+      <li><strong>Contact details</strong> — your name, email address, and optionally your phone number, so we can send you a beta invite and communicate about the programme</li>
+      <li><strong>Interview responses</strong> — your answers to questions about your job search habits, platform preferences, attitudes towards AI tools, privacy comfort levels, and willingness to pay. These are used anonymously and in aggregate to shape product decisions</li>
+      <li><strong>Brand name ratings</strong> — your star ratings and preferences across the candidate brand names we're evaluating, used solely for internal naming decisions</li>
+      <li><strong>Automatically derived flags</strong> — a summary label generated from your responses (e.g. "WTP: high", "AI-enthusiast") used to triage beta cohort fit. These are not shared externally</li>
+    </ul>
+
+    <div class="highlight-box">
+      <strong>We do not collect:</strong> payment information, government IDs, sensitive personal data (health, ethnicity, religion, etc.), or any data about your actual job applications or employment history.
+    </div>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">3</span> Legal basis for processing</h2>
+    <p>We process your data on the basis of <strong>consent</strong> — the checkbox you ticked before submitting your details. You can withdraw consent at any time (see Section 6).</p>
+    <p>Interview responses used for product research are processed on the basis of our <strong>legitimate interest</strong> in understanding candidate needs, provided they are anonymised before any analysis.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">4</span> How long we keep your data</h2>
+
+    <div class="retention-box">
+      <div class="retention-icon">🗓</div>
+      <div class="retention-text">
+        <strong>Retention period: 6 months from the date of submission.</strong><br>
+        Your personal data (name, email, phone) and linked interview responses are automatically deleted from our systems 6 months after you submit this form. If you join the beta and become an active user, a separate privacy notice will apply to your account data.
+      </div>
+    </div>
+
+    <p>After 6 months, any data used for product research will be fully anonymised — meaning it cannot be linked back to you in any way.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">5</span> Who has access to your data</h2>
+    <ul>
+      <li><strong>SonicJobs team members</strong> directly involved in the beta programme (product, engineering, and research leads)</li>
+      <li><strong>Google</strong> — your data is stored in Google Sheets, subject to Google's data processing terms. Google does not use your data for advertising or share it with third parties</li>
+    </ul>
+    <p>We do not sell, rent, or share your personal data with any third parties for marketing purposes. We do not use your data for automated decision-making that has legal or similarly significant effects on you.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">6</span> Your rights</h2>
+    <p>Under GDPR and applicable privacy law, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> — request a copy of the data we hold about you</li>
+      <li><strong>Erasure</strong> — ask us to delete your data at any time before the 6-month automatic deletion</li>
+      <li><strong>Correction</strong> — ask us to correct inaccurate data</li>
+      <li><strong>Withdraw consent</strong> — opt out of the beta programme at any time with no consequence</li>
+      <li><strong>Portability</strong> — receive your data in a machine-readable format</li>
+      <li><strong>Object</strong> — object to processing based on legitimate interest</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <strong>privacy@sonicjobs.com</strong>. We will respond within 30 days.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">7</span> Security</h2>
+    <p>Your data is stored in a private Google Sheet accessible only to authorised SonicJobs team members. Submissions are protected by a server-side authentication token — publicly discoverable URLs cannot read or extract your data. We use HTTPS for all data in transit.</p>
+    <p>No system is completely secure. In the event of a data breach that affects your personal data, we will notify you and the relevant supervisory authority within 72 hours as required by GDPR.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">8</span> Cookies</h2>
+    <p>This beta interview page does not use cookies, tracking pixels, or analytics scripts. We do not track your behaviour across other websites.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">9</span> Contact & complaints</h2>
+    <div class="contact-box">
+      <p>For privacy questions or to exercise your rights: <a href="mailto:privacy@sonicjobs.com">privacy@sonicjobs.com</a><br>
+      If you are unhappy with how we handle your data, you have the right to lodge a complaint with your national data protection authority. In the UK this is the <a href="https://ico.org.uk" target="_blank">ICO</a>. In the EU, contact your local supervisory authority.</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to beta signup</a>
+  </div>
+</div>
+
+</body>
+</html>

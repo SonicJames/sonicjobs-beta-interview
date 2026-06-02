@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SonicJobs — Join the Beta</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #201150;
+    --gold:   #bf965c;
+    --gold-light: #d4af7a;
+    --gold-bg: #faf6f0;
+    --text:   #1a1a2e;
+    --muted:  #6b7280;
+    --border: #e5e0d8;
+    --surface:#ffffff;
+    --light:  #f8f7f5;
+    --chip-bg:#f1ede6;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--light);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 80px;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    width: 100%;
+    background: var(--navy);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar-logo img {
+    height: 32px;
+    width: auto;
+  }
+  .topbar-wordmark {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .topbar-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    width: 100%;
+    background: var(--navy);
+    padding: 48px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 65% 40%, rgba(191,150,92,0.14) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(191,150,92,0.15);
+    border: 1px solid rgba(191,150,92,0.4);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .hero-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 {
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    max-width: 600px;
+    margin-left: auto; margin-right: auto;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.75;
+    max-width: 500px;
+    margin: 0 auto 28px;
+  }
+  .spots-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+  }
+  .spots-bar strong { color: #fff; }
+  .fill-bar { width: 110px; height: 4px; background: rgba(255,255,255,0.12); border-radius: 4px; overflow: hidden; }
+  .fill-bar-inner { height: 100%; width: 34%; background: var(--gold); border-radius: 4px; }
+
+  /* ── CONTENT ── */
+  .content { width: 100%; max-width: 640px; padding: 0 20px; margin-top: -28px; }
+
+  /* ── PROGRESS ── */
+  .progress-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px 14px 0 0;
+    padding: 20px 28px 0;
+    box-shadow: 0 2px 12px rgba(32,17,80,0.06);
+  }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+  .progress-bar { height: 3px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--navy), var(--gold)); border-radius: 4px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 28px 28px 32px;
+    box-shadow: 0 4px 24px rgba(32,17,80,0.08);
+    animation: fadeUp 0.35s ease;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .standalone-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 28px;
+    box-shadow: 0 4px 24px rgba(32,17,80,0.08);
+    margin-top: 8px;
+    animation: fadeUp 0.35s ease;
+  }
+
+  /* ── SECTION BREAK ── */
+  .section-break {
+    background: var(--gold-bg);
+    border: 1px solid rgba(191,150,92,0.25);
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+  }
+  .section-break-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .section-break-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .section-break-text strong { color: var(--text); }
+
+  .q-number { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .q-text { font-size: 18px; font-weight: 600; line-height: 1.45; color: var(--text); margin-bottom: 8px; }
+  .q-hint { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .chip {
+    background: var(--chip-bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 5px 13px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--gold); color: var(--text); }
+  .chip.selected { background: rgba(191,150,92,0.12); border-color: var(--gold); color: #7a5a2a; font-weight: 600; }
+
+  textarea {
+    width: 100%;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 15px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    resize: vertical;
+    min-height: 108px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(191,150,92,0.12); }
+  textarea::placeholder { color: #bbb; }
+  .char-count { text-align: right; font-size: 11px; color: #ccc; margin-top: 4px; }
+
+  /* ── BRAND RATINGS ── */
+  .brand-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .brand-row { background: var(--light); border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; transition: border-color 0.15s; }
+  .brand-row:hover { border-color: rgba(191,150,92,0.4); }
+  .brand-row-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .brand-row-tagline { font-size: 12px; color: var(--muted); margin-bottom: 10px; font-style: italic; }
+  .star-row { display: flex; gap: 4px; }
+  .star { font-size: 22px; cursor: pointer; color: #ddd; transition: color 0.12s, transform 0.12s; user-select: none; line-height: 1; }
+  .star:hover, .star.lit { color: var(--gold); transform: scale(1.15); }
+
+  /* ── BUTTONS ── */
+  .nav { display: flex; gap: 10px; margin-top: 22px; align-items: center; }
+  .btn { padding: 11px 22px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+  .btn-primary { background: var(--navy); color: #fff; flex: 1; }
+  .btn-primary:hover { background: #2e1a6e; box-shadow: 0 4px 16px rgba(32,17,80,0.25); transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: #fff; flex: 1; }
+  .btn-gold:hover { background: var(--gold-light); box-shadow: 0 4px 16px rgba(191,150,92,0.35); transform: translateY(-1px); }
+  .skip-link { text-align: center; margin-top: 13px; font-size: 12px; color: #ccc; }
+  .skip-link a { color: #bbb; text-decoration: underline; cursor: pointer; }
+  .skip-link a:hover { color: var(--muted); }
+
+  /* ── SIGNUP ── */
+  .signup-screen { display: none; }
+  .beta-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--gold-bg); border: 1px solid rgba(191,150,92,0.3); border-radius: 8px; padding: 7px 13px; font-size: 12px; font-weight: 600; color: #7a5a2a; margin-bottom: 18px; }
+  .field-group { margin-bottom: 13px; }
+  label { display: block; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; }
+  input[type=text], input[type=email] {
+    width: 100%; background: var(--light); border: 1px solid var(--border); border-radius: 8px;
+    padding: 11px 13px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(191,150,92,0.12); }
+  .consent-box { display: flex; gap: 10px; align-items: flex-start; background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 11px 13px; margin: 14px 0; }
+  .consent-box input[type=checkbox] { margin-top: 2px; accent-color: var(--navy); width: 14px; height: 14px; flex-shrink: 0; }
+  .consent-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .review-note { display: flex; align-items: flex-start; gap: 9px; background: rgba(32,17,80,0.04); border-left: 3px solid var(--navy); border-radius: 0 8px 8px 0; padding: 11px 13px; margin-top: 13px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .review-note strong { color: var(--navy); }
+
+  /* ── THANK YOU ── */
+  .thankyou-screen { display: none; }
+  .ty-icon { width: 52px; height: 52px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 auto 18px; }
+
+  /* ── SUMMARY ── */
+  .summary-screen { display: none; }
+  .summary-q { margin-bottom: 16px; }
+  .summary-q-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .summary-q-answer { font-size: 13px; color: var(--text); background: var(--light); border-radius: 8px; padding: 10px 13px; line-height: 1.65; }
+  .flag-row { display: flex; flex-wrap: wrap; gap: 5px; }
+  .flag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 100px; }
+  .flag-green { background: #edfaf3; color: #1a7a4a; border: 1px solid #a7e3c4; }
+  .flag-amber { background: #fdf6ec; color: #a05a1a; border: 1px solid #e8c98a; }
+  .flag-navy  { background: rgba(32,17,80,0.07); color: var(--navy); border: 1px solid rgba(32,17,80,0.18); }
+  .brand-summary-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .brand-summary-name { font-size: 13px; font-weight: 600; color: var(--text); min-width: 90px; }
+  .bar-track { flex:1; height:5px; background:var(--border); border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; background: linear-gradient(90deg, var(--navy), var(--gold)); border-radius:4px; }
+  .bar-score { font-size:12px; color:var(--muted); min-width:24px; text-align:right; }
+  .section-pill { display:inline-flex; align-items:center; gap:5px; background:rgba(32,17,80,0.06); border-radius:100px; padding:3px 11px; font-size:11px; font-weight:600; color:var(--navy); letter-spacing:0.07em; text-transform:uppercase; margin-bottom:12px; }
+  .divider { height:1px; background:var(--border); margin:18px 0; }
+  .footer-note { text-align:center; font-size:11px; color:#bbb; margin-top:28px; padding:0 20px; }
+  .footer-note a { color:#bbb; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="data:image/png;base64,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" alt="SonicJobs icon">
+    <span class="topbar-wordmark">SonicJobs</span>
+  </div>
+  <span class="topbar-label">Candidate Beta Research</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><div class="hero-dot"></div> Closed Beta — 500 spots only</div>
+  <h1>Get hired faster.<br><span>Be one of the first 500.</span></h1>
+  <p>We're building a service that finds the right jobs for you and applies on your behalf — with AI-tailored applications, one-click submission, and tracked communications. Answer a few questions, and we'll invite you in free.</p>
+  <div class="spots-bar">
+    <div class="fill-bar"><div class="fill-bar-inner" id="spots-bar-fill" style="width:34%"></div></div>
+    <span><strong><span id="spots-filled">170</span> of 500</strong> spots filled<span id="spots-urgency"></span></span>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="progress-card">
+    <div class="progress-meta">
+      <span id="progress-label">Question 1 of 22</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="card" id="interview-card">
+    <div id="question-container"></div>
+    <div class="nav">
+      <button class="btn btn-ghost" id="btn-back" onclick="prevQ()">← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQ()">Continue →</button>
+    </div>
+    <div class="skip-link"><a onclick="skipQ()">Skip this question</a></div>
+  </div>
+
+  <div class="standalone-card signup-screen" id="signup-card">
+    <div class="beta-badge">🎯 &nbsp;You're a strong fit for the beta</div>
+    <div class="q-text" style="font-size:22px; margin-bottom:8px;">Reserve your spot now.</div>
+    <p style="font-size:14px; color:var(--muted); line-height:1.75; margin-bottom:22px;">
+      We're accepting <strong style="color:var(--text);">500 candidates</strong> in the first cohort. Beta members get <strong style="color:var(--text);">3 months of free Pro access</strong> — AI-matched jobs, tailored applications, and one-click apply. Some of them will land interviews they wouldn't have found themselves.
+    </p>
+    <div class="field-group"><label>First name</label><input type="text" id="f-name" placeholder="Your first name"></div>
+    <div class="field-group"><label>Email address</label><input type="email" id="f-email" placeholder="your@email.com"></div>
+    <div class="field-group"><label>Phone <span style="font-weight:400;text-transform:none;font-size:11px;">(optional)</span></label><input type="text" id="f-phone" placeholder="+1 555 000 0000"></div>
+    <div class="consent-box">
+      <input type="checkbox" id="f-consent">
+      <div class="consent-text">I agree to SonicJobs contacting me about the beta programme. My interview responses may be used anonymously to improve the product. Data is held for 6 months. I can withdraw at any time. <a href="privacy.html" target="_blank" style="color:var(--gold);text-decoration:underline;">Privacy Notice →</a></div>
+    </div>
+    <button class="btn btn-gold" style="width:100%; padding:13px;" id="signup-btn" onclick="submitSignup()">Reserve my beta spot →</button>
+    <div class="review-note">
+      <span>⏱</span>
+      <span><strong>What happens next:</strong> We'll review your answers within 24 hours. If you're a good fit, you'll receive a personal invite. Not everyone gets in — we're curating the first cohort carefully.</span>
+    </div>
+    <div class="skip-link" style="margin-top:14px;"><a onclick="showThankyou(false)">No thanks, I'll skip</a></div>
+  </div>
+
+  <div class="standalone-card thankyou-screen" id="thankyou-card">
+    <div class="ty-icon">✓</div>
+    <div class="q-text" style="text-align:center; font-size:22px;" id="ty-headline">You're on the list.</div>
+    <p style="text-align:center; font-size:14px; color:var(--muted); line-height:1.75; margin-top:10px;" id="ty-sub">We'll review your answers and be in touch within 24 hours. Beta invites go to the best-fit candidates first — watch your inbox.</p>
+    <div class="divider"></div>
+    <div style="text-align:center;">
+      <button class="btn btn-ghost" onclick="showSummary()" style="font-size:12px; padding:7px 14px;">📋 View interview summary (internal)</button>
+    </div>
+  </div>
+
+  <div class="standalone-card summary-screen" id="summary-card">
+    <div class="section-pill">📊 Internal summary</div>
+    <div id="summary-content"></div>
+    <div style="margin-top:22px;">
+      <button class="btn btn-primary" style="width:100%;" onclick="downloadSummary()">⬇ Download as JSON</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer-note">© 2026 SonicJobs. All rights reserved. &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></div>
+
+<script>
+const BRAND_NAMES = [
+  { id: 'applify',   name: 'Applify',   tagline: '"Amplify your job applications."' },
+  { id: 'propel',    name: 'Propel',    tagline: '"We propel your career forward."' },
+  { id: 'hirebound', name: 'Hirebound', tagline: '"You\'re bound to get hired."' },
+  { id: 'applai',    name: 'Applai',    tagline: '"Apply with intelligence."' },
+  { id: 'stride',    name: 'Stride',    tagline: '"Every application is a stride forward."' },
+];
+const QUESTIONS = [
+  { section:"Your current job search", sectionIcon:"🔍", sectionIntro:"Let's start with where you are today — your honest experience of looking for work.", id:"q1", text:"Walk us through what your typical job search day looks like. What are you actually doing hour to hour?", hint:"Be as specific as you like — sites you visit, how many jobs you look at, how you decide to apply.", type:"textarea" },
+  { section:null, id:"q2", text:"What's the most frustrating part of applying for jobs right now?", hint:"There are no wrong answers here — we're genuinely trying to understand what's broken.", type:"textarea" },
+  { section:null, id:"q3", text:"How many jobs do you typically apply to per week? And how long does each application take you?", hint:"Rough estimates are fine.", type:"textarea", chips:["1–5 jobs / week","6–15 jobs / week","15+ jobs / week","It varies a lot"] },
+  { section:"The platforms you use today", sectionIcon:"📱", sectionIntro:"We want to understand which services you rely on — and how you really feel about them.", id:"q_inc1", text:"Which job platforms do you use most, and roughly how much of your time does each one get?", hint:"Think LinkedIn, Indeed, ZipRecruiter, Glassdoor, direct company sites — whatever's in your actual rotation.", type:"textarea", chips:["LinkedIn","Indeed","ZipRecruiter","Glassdoor","Company sites direct","Google Jobs","Jobcase","Other"] },
+  { section:null, id:"q_inc2", text:"For the platform you use most — what keeps you coming back? What would you genuinely miss if it disappeared?", hint:"Try to be specific. 'It has lots of jobs' is less useful than 'the Easy Apply button means I don't have to think.'", type:"textarea" },
+  { section:null, id:"q_inc3", text:"What does that same platform do that quietly irritates you — things you've just accepted as normal even though they're frustrating?", hint:"We're looking for the paper cuts — the things you've stopped noticing because they've always been there.", type:"textarea", chips:["Too many irrelevant jobs","Easy Apply goes nowhere","Recruiters spam me","No feedback after applying","Keeps showing same listings","Hard to track what I've applied for","Profile feels like a chore to maintain"] },
+  { section:null, id:"q_inc4", text:"Have you ever tried a different platform and gone back to your main one? What made you return?", hint:"If you've stuck with the same platform for years, what's kept you there — habit, quality, or something else?", type:"textarea", chips:["Habit — it's just what I know","More jobs on my platform","Better quality matches","My profile is already there","Tried others but they felt the same","Never really tried switching"] },
+  { section:null, id:"q_inc5", text:"What would a new service have to offer — or prove — to make you genuinely switch away from what you use today?", hint:"Think about what the bar really is. A slightly better experience? Measurable results? Something you've never seen before?", type:"textarea", chips:["Significantly more relevant jobs","Proof it gets more interviews","Much faster to apply","Feels like it's working for me not the employer","Free to try with no commitment","Friends using it and recommending it"] },
+  { section:"Where the process breaks down", sectionIcon:"⚡", sectionIntro:"Now let's dig into the specific moments that cause frustration or drop-off.", id:"q4", text:"Have you ever started an application and then abandoned it? What made you give up?", hint:"Think about the last time this happened — what was the specific thing that stopped you?", type:"textarea", chips:["Too many form fields","Sent to another site","Had to create an account","Asked for same info twice","CV upload failed","Took too long"] },
+  { section:null, id:"q5", text:"How do you feel when an employer sends you a verification code (2FA) before you can complete an application?", hint:"Some candidates find this reassuring, others find it a breaking point. What's your honest reaction?", type:"textarea", chips:["Annoying but I do it","I often give up here","Fine — security matters","Depends how easy it is"] },
+  { section:"AI & automation", sectionIcon:"🤖", sectionIntro:"We're building AI-powered tools to help candidates. We want to understand your comfort level honestly.", id:"q6", text:"If an AI could tailor your CV and write a cover letter for each specific job — automatically — how would that make you feel?", hint:"Think about trust, quality concerns, whether you'd want to review it, and whether it changes how the application feels.", type:"textarea", chips:["Love it — save me time","Only if I can review first","Worried it won't sound like me","Would depend on the job","Not comfortable with it"] },
+  { section:null, id:"q7", text:"Is there a type of job where you'd want full human control over your application — and another where you'd be happy to let AI handle it entirely?", hint:"For example: senior roles vs. casual work, creative roles vs. admin, etc.", type:"textarea" },
+  { section:null, id:"q7b", text:"If a service applied to jobs on your behalf automatically — without you reviewing each one — what's your biggest worry?", hint:"Think about what could go wrong. Being called for a job you don't want? Looking unprepared? Something else?", type:"textarea", chips:["Getting called for wrong roles","Sounding generic or fake","Employer detecting it's AI","Losing track of what I've applied for","Applying somewhere embarrassing","No major worries"] },
+  { section:null, id:"q7c", text:"Do you think employers can tell when an application has been written by AI — and does that concern you?", hint:"Some candidates worry this puts them at a disadvantage. Others think everyone is doing it. What's your instinct?", type:"textarea", chips:["Yes — and it concerns me","Yes — but I don't think it matters","Probably not","No idea","I'd want to disclose it"] },
+  { section:"Privacy & communications", sectionIcon:"🔒", sectionIntro:"Some features require handling your emails or storing your details. We want your honest reaction.", id:"q8", text:"If we could manage all your job application emails in one place — employer responses, interview requests, verification codes — would you trust a platform to do that?", hint:"Think about what would need to be true for you to hand over that part of the process.", type:"textarea", chips:["Yes, if I could still see everything","Only if I could turn it off","Not comfortable — email is private","Depends on the company"] },
+  { section:null, id:"q8b", text:"When you hear that a platform would handle your job application emails through a relay address, what's your gut reaction — and what would it take to trust it?", hint:"Be honest. Does it feel like phishing risk? A useful feature? Or something in between?", type:"textarea", chips:["Sounds like phishing — hard no","Nervous but could be convinced","Fine if the company is credible","Great idea — I hate managing those emails"] },
+  { section:null, id:"q9", text:"How do you feel about a service storing your CV, work history, and application preferences so you never have to re-enter them?", hint:"Some people love this convenience, others worry about data. What's your honest take?", type:"textarea", chips:["Great — convenience wins","Fine if I can delete it","Worried about data use","Only with clear privacy terms"] },
+  { section:null, id:"q9b", text:"You probably already have a system for tracking your job search. What would it take to make you switch to a new platform and trust it with all of that?", hint:"Think about what you'd lose, what you'd gain, and what the new platform would have to nail to earn that switch.", type:"textarea", chips:["It'd have to save me real time","It'd need to prove results first","I'd need to try it risk-free","I don't have a system — I'd switch easily","I'd need to trust the company first"] },
+  { section:"Value & willingness to pay", sectionIcon:"💳", sectionIntro:"One last section — about what this would be worth to you.", id:"q10", text:"If this service saved you 5 hours per week on job applications and measurably increased the number of interviews you got — what would that be worth to you per month?", hint:"Be honest — 'nothing, I wouldn't pay for this' is a valid and useful answer.", type:"textarea", chips:["I wouldn't pay for it","Up to $5/month","Up to $10/month","$15–$20/month","More — if results are proven"] },
+  { section:null, id:"q11", text:"What would a service have to prove to you — or let you experience — before you'd pay for it?", hint:"What's the 'aha moment' that would make you reach for your card?", type:"textarea" },
+  { section:"Your ideal experience", sectionIcon:"✨", sectionIntro:"Before we show you something, we want to hear your words first.", id:"q12", text:"If you could redesign the job application experience from scratch — what would it look like, and what would it never do?", hint:"No constraints. Dream a little.", type:"textarea" },
+  { section:"One last thing — a name", sectionIcon:"✦", sectionIntro:"We're deciding what to call this new service. We'd love your instinctive reaction to these names.", id:"q_brand", text:"Rate each name out of 5 stars based on your gut reaction — then tell us which one you'd actually remember.", hint:"Don't overthink it. First impressions are what matter here.", type:"brand" },
+];
+
+let current = 0, answers = {}, brandRatings = {};
+
+function render() {
+  var q = QUESTIONS[current];
+  var html = '';
+  if (q.section) html += '<div class="section-break"><div class="section-break-icon">'+q.sectionIcon+'</div><div class="section-break-text"><strong>'+q.section+'</strong>'+(q.sectionIntro?'<br>'+q.sectionIntro:'')+'</div></div>';
+  html += '<div class="q-number">Question '+(current+1)+' of '+QUESTIONS.length+'</div>';
+  html += '<div class="q-text">'+q.text+'</div>';
+  if (q.hint) html += '<div class="q-hint">'+q.hint+'</div>';
+  if (q.type==='brand') {
+    html += '<div class="brand-grid">';
+    BRAND_NAMES.forEach(function(b){
+      var s=brandRatings[b.id]||0;
+      html += '<div class="brand-row"><div class="brand-row-name">'+b.name+'</div><div class="brand-row-tagline">'+b.tagline+'</div><div class="star-row" id="stars-'+b.id+'">';
+      for(var i=1;i<=5;i++) html+='<span class="star'+(i<=s?' lit':'')+'" onclick="rateBrand(\''+b.id+'\','+i+')">★</span>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+    var fav=answers['q_brand_fav']||'';
+    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:500;">Which name would stick in your head a week from now?</div><div class="chips" id="chips-brand-fav">';
+    BRAND_NAMES.forEach(function(b){ html+='<div class="chip'+(fav===b.name?' selected':'')+'" onclick="pickFav(\''+b.name+'\',this)">'+b.name+'</div>'; });
+    html += '</div>';
+    var why=answers['q_brand_why']||'';
+    html += '<div style="font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:500;">Anything feel wrong or off? Any name you\'d actively avoid — and why?</div>';
+    html += '<textarea id="ta-q_brand" placeholder="Optional thoughts..." onInput="charCount(this,\'q_brand\')">'+why+'</textarea>';
+    html += '<div class="char-count" id="cc-q_brand">'+why.length+' chars</div>';
+  } else {
+    if (q.chips) {
+      html += '<div class="chips" id="chips-'+q.id+'">';
+      q.chips.forEach(function(c){ var sel=(answers[q.id+'_chips']||[]).includes(c)?'selected':''; html+='<div class="chip '+sel+'" onclick="toggleChip(\''+q.id+'\',this,\''+c.replace(/'/g,"&#39;")+'\')">'+c+'</div>'; });
+      html += '</div>';
+    }
+    var saved=answers[q.id]||'';
+    html += '<textarea id="ta-'+q.id+'" placeholder="Type your answer here..." onInput="charCount(this,\''+q.id+'\')">'+saved+'</textarea>';
+    html += '<div class="char-count" id="cc-'+q.id+'">'+saved.length+' chars</div>';
+  }
+  document.getElementById('question-container').innerHTML = html;
+  document.getElementById('btn-back').style.display = current===0?'none':'flex';
+  updateProgress();
+}
+function charCount(el,id){ var e=document.getElementById('cc-'+id); if(e) e.textContent=el.value.length+' chars'; }
+function rateBrand(id,score){ brandRatings[id]=score; var r=document.getElementById('stars-'+id); if(r) r.querySelectorAll('.star').forEach(function(s,i){s.classList.toggle('lit',i<score);}); }
+function pickFav(name,el){ answers['q_brand_fav']=name; document.querySelectorAll('#chips-brand-fav .chip').forEach(function(c){c.classList.remove('selected');}); el.classList.add('selected'); }
+function toggleChip(qid,el,val){ if(!answers[qid+'_chips']) answers[qid+'_chips']=[]; if(el.classList.contains('selected')){el.classList.remove('selected');answers[qid+'_chips']=answers[qid+'_chips'].filter(function(v){return v!==val;});}else{el.classList.add('selected');answers[qid+'_chips'].push(val);} }
+function saveCurrentAnswer(){ var q=QUESTIONS[current],ta=document.getElementById('ta-'+q.id); if(ta) answers[q.id]=ta.value; if(q.type==='brand') answers['_brandRatings']=Object.assign({},brandRatings); }
+function nextQ(){ saveCurrentAnswer(); if(current<QUESTIONS.length-1){current++;render();window.scrollTo({top:0,behavior:'smooth'});}else{document.getElementById('interview-card').style.display='none';document.getElementById('progress-fill').style.width='100%';document.getElementById('progress-pct').textContent='100%';document.getElementById('progress-label').textContent='Complete';document.getElementById('signup-card').style.display='block';window.scrollTo({top:0,behavior:'smooth'});} }
+function prevQ(){ saveCurrentAnswer(); if(current>0){current--;render();window.scrollTo({top:0,behavior:'smooth'});} }
+function skipQ(){ answers[QUESTIONS[current].id]='[skipped]'; nextQ(); }
+function updateProgress(){ var pct=Math.round((current/QUESTIONS.length)*100); document.getElementById('progress-fill').style.width=pct+'%'; document.getElementById('progress-pct').textContent=pct+'%'; document.getElementById('progress-label').textContent='Question '+(current+1)+' of '+QUESTIONS.length; }
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhCDv9mEhjng0CpzoiwH0j9pQl2Y3KXbZvLq51ZS7OvuqlIRzeJwGHUVBtgk0pIgAO6w/exec';
+const TOTAL_SPOTS = 500;
+const SECRET_TOKEN = '8c0b19301a1cd999690fef8a1e8cb111';
+
+async function loadSpotCount() {
+  try {
+    var res = await fetch(APPS_SCRIPT_URL);
+    var data = await res.json();
+    var filled = data.count || 0;
+    var pct = Math.min(100, Math.round((filled / TOTAL_SPOTS) * 100));
+    var el = document.getElementById('spots-filled');
+    var bar = document.getElementById('spots-bar-fill');
+    if (el) el.textContent = filled;
+    if (bar) bar.style.width = pct + '%';
+    var urg = document.getElementById('spots-urgency');
+    if (urg && data.spots_left <= 50) {
+      urg.textContent = ' — only ' + data.spots_left + ' left!';
+      urg.style.color = '#bf965c';
+    }
+  } catch(e) { /* fail silently */ }
+}
+
+async function submitSignup() {
+  var name = document.getElementById('f-name').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var consent = document.getElementById('f-consent').checked;
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  if (!consent) { alert('Please tick the consent box.'); return; }
+  answers['_signup'] = { name: name, email: email, phone: document.getElementById('f-phone').value.trim(), timestamp: new Date().toISOString() };
+  var btn = document.getElementById('signup-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ answers: answers, brandRatings: brandRatings, flags: assessFlags(), token: SECRET_TOKEN })
+    });
+    showThankyou(true);
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Reserve my beta spot →';
+    alert('Something went wrong. Please try again — your answers are safe.');
+  }
+}
+function showThankyou(signed){ document.getElementById('signup-card').style.display='none'; document.getElementById('thankyou-card').style.display='block'; if(!signed){document.getElementById('ty-headline').textContent='Thanks for your time.';document.getElementById('ty-sub').textContent='Your feedback helps us build something genuinely useful. If you change your mind, visit sonicjobs.com/beta.';} window.scrollTo({top:0,behavior:'smooth'}); }
+function showSummary(){
+  document.getElementById('thankyou-card').style.display='none';
+  document.getElementById('summary-card').style.display='block';
+  var html='';
+  if(answers._signup) html+='<div class="section-break" style="margin-bottom:18px;"><div class="section-break-icon">👤</div><div class="section-break-text"><strong>'+answers._signup.name+'</strong> — '+answers._signup.email+'<br>'+answers._signup.timestamp+'</div></div>';
+  var flags=assessFlags();
+  if(flags.length){html+='<div style="margin-bottom:16px;"><div class="section-pill" style="margin-bottom:8px;">🚦 Flags</div><div class="flag-row">';flags.forEach(function(f){html+='<span class="flag flag-'+f.type+'">'+f.label+'</span>';});html+='</div></div><div class="divider"></div>';}
+  if(answers._brandRatings&&Object.keys(answers._brandRatings).length){
+    html+='<div style="margin-bottom:18px;"><div class="section-pill" style="margin-bottom:10px;">✦ Brand ratings</div>';
+    var sorted=BRAND_NAMES.slice().sort(function(a,b){return(answers._brandRatings[b.id]||0)-(answers._brandRatings[a.id]||0);});
+    sorted.forEach(function(b){var sc=answers._brandRatings[b.id]||0;html+='<div class="brand-summary-bar"><div class="brand-summary-name">'+b.name+'</div><div class="bar-track"><div class="bar-fill" style="width:'+(sc*20)+'%"></div></div><div class="bar-score">'+sc+'/5</div></div>';});
+    if(answers.q_brand_fav) html+='<div style="margin-top:7px;font-size:12px;color:var(--muted);">Most memorable: <strong style="color:var(--text);">'+answers.q_brand_fav+'</strong></div>';
+    html+='</div><div class="divider"></div>';
+  }
+  QUESTIONS.forEach(function(q,idx){
+    if(q.type==='brand') return;
+    var ans=answers[q.id]||'',chips=answers[q.id+'_chips'];
+    if(!ans&&!chips) return;
+    html+='<div class="summary-q"><div class="summary-q-label">Q'+(idx+1)+': '+q.text+'</div>';
+    if(chips&&chips.length) html+='<div class="flag-row" style="margin-bottom:5px;">'+chips.map(function(c){return'<span class="flag flag-navy">'+c+'</span>';}).join('')+'</div>';
+    if(ans&&ans!=='[skipped]') html+='<div class="summary-q-answer">'+ans+'</div>';
+    html+='</div>';
+  });
+  if(answers.q_brand) html+='<div class="summary-q"><div class="summary-q-label">Brand comments</div><div class="summary-q-answer">'+answers.q_brand+'</div></div>';
+  document.getElementById('summary-content').innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function assessFlags(){
+  var flags=[],payAns=(answers.q10||'')+((answers.q10_chips||[]).join(' ')),privacyAns=(answers.q8||'')+((answers.q8_chips||[]).join(' ')),aiAns=(answers.q6||'')+((answers.q6_chips||[]).join(' ')),relayAns=(answers.q8b||'')+((answers.q8b_chips||[]).join(' ')),autoAns=(answers.q7b||'')+((answers.q7b_chips||[]).join(' ')),incPlatforms=answers.q_inc1_chips||[],incSwitchAns=(answers.q_inc5||'')+((answers.q_inc5_chips||[]).join(' ')),incLoyal=(answers.q_inc4||'')+((answers.q_inc4_chips||[]).join(' '));
+  if(/wouldn't pay|nothing|no/i.test(payAns)) flags.push({type:'amber',label:'Pay-hesitant'});
+  else if(/$10|$15|$20|more/i.test(payAns)) flags.push({type:'green',label:'WTP: high'});
+  else if(/$5/i.test(payAns)) flags.push({type:'green',label:'WTP: medium'});
+  if(/not comfortable|private|hard no/i.test(privacyAns+relayAns)) flags.push({type:'amber',label:'Privacy concern'});
+  else if(/yes|fine|great|credible/i.test(privacyAns+relayAns)) flags.push({type:'green',label:'Relay-ready'});
+  if(/not comfortable|worried/i.test(aiAns)) flags.push({type:'amber',label:'AI-hesitant'});
+  else if(/love|save me|happy/i.test(aiAns)) flags.push({type:'green',label:'AI-enthusiast'});
+  if(/wrong roles|generic|embarrassing/i.test(autoAns)) flags.push({type:'amber',label:'Auto-apply concern'});
+  if(/no major worries/i.test(autoAns)) flags.push({type:'green',label:'Auto-apply open'});
+  if(/Habit|already there/i.test(incLoyal)) flags.push({type:'amber',label:'Incumbent-loyal'});
+  if(/never really tried/i.test(incLoyal)) flags.push({type:'amber',label:'Never switched'});
+  if(/proof|results|measurable/i.test(incSwitchAns)) flags.push({type:'amber',label:'Needs proof to switch'});
+  if(/free to try|no commitment/i.test(incSwitchAns)) flags.push({type:'green',label:'Trial-open'});
+  if(incPlatforms.includes('LinkedIn')) flags.push({type:'navy',label:'LinkedIn user'});
+  if(incPlatforms.includes('Indeed')) flags.push({type:'navy',label:'Indeed user'});
+  if(answers._signup) flags.push({type:'green',label:'Beta signed-up ✓'});
+  return flags;
+}
+function downloadSummary(){ var blob=new Blob([JSON.stringify({answers:answers,brandRatings:brandRatings,flags:assessFlags()},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='sonicjobs_interview_'+Date.now()+'.json';a.click(); }
+render();
+loadSpotCount();
+</script>
+</body>
+</html>
